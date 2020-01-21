@@ -9,9 +9,9 @@
 #include <ctime>
 #include <time.h>
 #include <vector>
-// #include <chrono>
+#include "/home/indra/Documents/GitHub/ConvexHull_BruteForce/matplotlibcpp.h"
+namespace plt = matplotlibcpp;
 using namespace std;
-// using namespace std::chrono;
 
 struct point {
     int x;
@@ -26,6 +26,8 @@ int main () {
 
     point P;
     point SetOfPoint[N];
+    vector<point> ListOfConvex;
+    vector<int> sx(N), sy(N), cx, cy;
 
     srand(time(NULL));
     for (int i=0; i<N; i++) {
@@ -34,21 +36,7 @@ int main () {
         SetOfPoint[i] = P;
     }
 
-    /*
-    SetOfPoint[0].x = 10;
-    SetOfPoint[0].y = 30;
-    SetOfPoint[1].x = 12;
-    SetOfPoint[1].y = 32;
-    SetOfPoint[2].x = 45;
-    SetOfPoint[2].y = 98;
-    SetOfPoint[3].x = 65;
-    SetOfPoint[3].y = 12;
-    SetOfPoint[4].x = 5;
-    SetOfPoint[4].y = 80;
-    */
-
-    vector<point> ListOfConvex;
-
+    //Start time
     clock_t begin = clock();
     //Find the leftmost point in set of points
     point LeftMost = SetOfPoint[0];
@@ -122,16 +110,18 @@ int main () {
             }
             if (CurrentPoint.x == LeftMost.x && CurrentPoint.y == LeftMost.y) {
                 iLoop = false;
-                //ListOfConvex.push_back(CurrentPoint);
             }
         }
     }
+    //End time
     clock_t end = clock();
 
     //Output Program
     cout << "Set of Points that shapes the convex hull is\n";
     cout << '[';
     for (auto i = ListOfConvex.begin(); i != ListOfConvex.end(); i++) {
+        cx.push_back((*i).x);
+        cy.push_back((*i).y);
         cout << '(' << (*i).x << ',' << (*i).y << ")";
     }
     cout << "]\n\n";
@@ -144,5 +134,14 @@ int main () {
     cout << "Processor: AMD E-300 APU with Radeon HD Graphics 1.30 GHz\n";
     cout << "RAM: 2GB\n";
     cout << "Operating system: Windows 10 64bit\n";
+
+    //Plotting
+    for (int i=0; i<N; i++) {
+        sx.at(i) = SetOfPoint[i].x;
+        sy.at(i) = SetOfPoint[i].y;
+    }
+    plt::plot(sx,sy,"ro");
+    plt::plot(cx,cy,"bo-");
+    plt::show();
     return 0;
 }
