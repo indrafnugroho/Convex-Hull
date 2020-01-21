@@ -51,11 +51,7 @@ int main () {
     if (N==2) {
         ListOfConvex.push_back(LeftMost);
         for (int i=0; i<N; i++) {
-            if (SetOfPoint[i].x == LeftMost.x && SetOfPoint[i].y == LeftMost.y && i==0) {
-                continue;
-            } else if (SetOfPoint[i].x == LeftMost.x && SetOfPoint[i].y == LeftMost.y && i==1) {
-                break;
-            } else {
+            if (i!=IdxLM) {
                 ListOfConvex.push_back(SetOfPoint[i]);
             }
         }
@@ -117,6 +113,13 @@ int main () {
     clock_t end = clock();
 
     //Output Program
+    cout << "Generated set of points is\n";
+    cout << "[";
+    for (int i=0; i<N; i++) {
+        cout << '(' << SetOfPoint[i].x << ',' << SetOfPoint[i].y << ")";
+    }
+    cout << "]\n\n";
+    
     cout << "Set of Points that shapes the convex hull is\n";
     cout << '[';
     for (auto i = ListOfConvex.begin(); i != ListOfConvex.end(); i++) {
@@ -133,7 +136,7 @@ int main () {
     cout << "This program is executed in a computer with spesification below\n" ;
     cout << "Processor: AMD E-300 APU with Radeon HD Graphics 1.30 GHz\n";
     cout << "RAM: 2GB\n";
-    cout << "Operating system: Windows 10 64bit\n";
+    cout << "Operating system: Lubuntu 19.10\n";
 
     //Plotting
     for (int i=0; i<N; i++) {
