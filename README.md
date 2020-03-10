@@ -1,4 +1,4 @@
-# ConvexHull_BruteForce
+# Convex-Hull
 
 To compile the program, type in
 
